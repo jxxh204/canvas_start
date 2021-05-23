@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./modernizr.js"></script>
+    <title>canvas</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+    .canvas {
+        width: 600px;
+        height: 400px;
+        background-color: #eee;
+    }
+</style>
+<body>
+    <!-- 해상도 3배 -->
+    <canvas class="canvas" width="1800" height="1200">
+        이 브라우저는 캔버스를 지원하지 않습니다.
+    </canvas>
+    <!--
+    스케치북 600x400을 만든다는 것. css로 입력하는 것과 직접입력은 의미가 다르다
+    기존크기(600x400)에서 css(300x200)를 넣으면 전체 크기는 600x400이 되지만
+    해상도가 1200x800이 된다고 생각하면된다. 전체화면이라고 생각하면 css(100%)-실제크기,
+    기존크기(200%)로하면 해상도 2배가된다.
+    -->
+    <script>
+        function 라디언(각도) {
+            return 각도 * Math.PI / 180;
+        }
+        const canvas = document.querySelector('.canvas');
+        const context = canvas.getContext('2d');
+
+        if(context) {
+            console.log('Canvas를 지원하는 브라우저입니다.')
+
+        } else {
+            console.log('지원x')
+        }
+    </script>
+</body>
+</html>
