@@ -29,18 +29,82 @@
     기존크기(200%)로하면 해상도 2배가된다.
     -->
     <script>
-        function 라디언(각도) {
-            return 각도 * Math.PI / 180;
-        }
-        const canvas = document.querySelector('.canvas');
-        const context = canvas.getContext('2d');
-
+        const canvas = document.querySelector('.canvas')
+        const context = canvas.getContext('2d')
         if(context) {
             console.log('Canvas를 지원하는 브라우저입니다.')
 
         } else {
             console.log('지원x')
         }
+        
+        // fillRect - 사각형그리기
+        // clearRect - 지우기
+        // strokeRect - 선을 긋는것.
+
+        // context.fillRect(50, 50, 200, 100)
+        // context.fillStyle = '#ff0000' //색상
+        // //               x, y, w,   h
+        // context.fillRect(0, 0, 100, 100) //그림을 그리겠다.
+        // context.clearRect(80, 80, 50, 50)
+        // context.strokeRect(150, 150, 100, 100)
+
+        // -------------------------------------------
+
+        // beginPath - 선의 시작을 알려줌.
+        // moveTo - 붓을 옮긴다.
+        // lineTo - 선을 만든다.
+        // closePath
+        // context.beginPath();
+        // context.moveTo(100, 100)
+        // context.lineTo(300, 200)
+        // context.stroke()
+        // context.closePath()
+
+        // -------------------------------------------
+
+        //beginPath - 그리기 시작
+        //arc
+        //closePath - 그리기 끝, 시작을 잘해주면 사용할 필요가없다.
+        //fill - 색상
+        //stroke  - 선
+        //중심을 기준으로 위치를 잡아야함.
+        // function 라디안(각도) {
+        //     return 각도 * Math.PI / 180
+        // }
+        // context.beginPath()
+        // //          x,   y,   반지름,0도~,  360도, 시계방향/ 반시계
+        // context.arc(300, 200, 50, 0, 라디안(360), true)
+        // context.stroke()
+
+        // context.beginPath()
+        // context.arc(500, 100, 20, 0, 라디안(360), true)
+        // context.stroke()
+
+        // -------------------------------------------
+        let xPos = 10;
+        let count = 0;
+        function draw() {
+            if (count % 30 === 0) { // 실행되는 순간을 늦추어 반복 속도를 바꾼다.
+                //360도가 2PI이다.
+                context.clearRect(0, 0, canvas.width, canvas.height)
+                context.beginPath()
+                context.arc(xPos, 400, 100, 0, Math.PI*2)
+                context.fill()
+                xPos += 10
+                if (xPos > 800) {
+                    xPos = 0
+                }
+            }
+            
+            count++
+            // animation : 성능에 따라서 조절해주기때문에 setInterval을 쓰지않고 이걸 사용.
+            // 모바일에서도 배터리 절약에 더 좋다. 최적화.
+            requestAnimationFrame(draw) 
+        }
+        draw()
+
+
     </script>
 </body>
 </html>
